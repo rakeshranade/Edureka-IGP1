@@ -1,9 +1,15 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
+        stage('Checkout Code') {
             steps {
-                git 'https://github.com/rakeshranade/Edureka-IGP1.git' 
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: 'refs/heads/main']],
+                    userRemoteConfigs: [[
+                        url: 'https://github.com/rakeshranade/Edureka-IGP1.git'
+                    ]]
+                ])
             }
         }
         stage('Build Docker Image') {

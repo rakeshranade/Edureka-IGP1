@@ -11,10 +11,10 @@ WORKDIR /src
 
 # Copy solution and project files for restore (keeps docker cache efficiency)
 COPY . .
-RUN dotnet restore "${PROJECT}"
+RUN dotnet restore ${PROJECT}
 
 # Build and publish
-RUN dotnet publish "${PROJECT}" -c ${CONFIG} -o /app/publish --no-restore -p:PublishTrimmed=true
+RUN dotnet publish ${PROJECT} -c ${CONFIG} -o /app/publish --no-restore -p:PublishTrimmed=true
 
 # Stage 2 - runtime
 FROM mcr.microsoft.com/dotnet/aspnet:${DOTNET_VERSION} AS runtime

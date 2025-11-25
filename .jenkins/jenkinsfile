@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image using the Dockerfile in the current directory
-                    sh "docker build -f .docker/igp1.dockerfile -t edureka-igp1:${env.BUILD_NUMBER} --build-arg PROJECT=src/Edureka-IGP/Edureka-IGP.sln ."
+                    sh "docker build -f .docker/igp1.dockerfile -t edureka-igp1:${env.BUILD_NUMBER} --build-arg PROJECT=Edureka-IGP/src/Edureka-IGP/Edureka-IGP.sln ."
                 }
             }
         }

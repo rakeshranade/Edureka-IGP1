@@ -2,7 +2,7 @@
 # docker build -f .docker/igp1.dockerfile -t myblazorapp --build-arg PROJECT=src/MyBlazorApp/MyBlazorApp.csproj .
 
 ARG DOTNET_VERSION=8.0
-ARG PROJECT=Edureka-IGP/src/Edureka-IGP/Edureka-IGP.sln
+ARG PROJECT=Edureka-IGP/Edureka-IGP.sln
 ARG CONFIG=Release
 
 # Stage 1 - build

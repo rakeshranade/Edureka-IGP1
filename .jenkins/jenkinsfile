@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/rakeshranade/Edureka-IGP1.git' 
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build the Docker image using the Dockerfile in the current directory
+                    sh "docker build -f .docker/igp1.dockerfile -t Edureka-IGP1:${env.BUILD_NUMBER} --build-arg PROJECT=src/MyBlazorApp/MyBlazorApp.csproj ."
+                }
+            }
+        }
+    }
+}

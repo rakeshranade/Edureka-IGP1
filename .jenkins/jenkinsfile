@@ -59,7 +59,7 @@ pipeline {
                     //delete container
                     sh "docker rm edureka-igp1-container"
                     //delete debug image
-                    sh "docker rmi edureka-igp1:${env.BUILD_NUMBER}"
+                    //sh "docker rmi edureka-igp1:${env.BUILD_NUMBER}"
 
                 }
             }

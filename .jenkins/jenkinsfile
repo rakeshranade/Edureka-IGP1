@@ -64,18 +64,18 @@ pipeline {
                 }
             }
         }
-        // stage('Push Docker Image') {
-        //     steps {
-        //         script {
-        //             // Log in to Docker Hub
-        //             withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
-        //                 sh "echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin"
-        //             }
-        //             // Push the Docker image to Docker Hub
-        //             sh "docker tag edureka-igp1:${env.BUILD_NUMBER} ${DOCKERHUB_USERNAME}/edureka-igp1:${env.BUILD_NUMBER}"
-        //             sh "docker push ${DOCKERHUB_USERNAME}/edureka-igp1:${env.BUILD_NUMBER}"
-        //         }
-        //     }
-        // }
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    // Log in to Docker Hub
+                    withCredentials([usernamePassword(credentialsId: '777', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                        sh "echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin"
+                    }
+                    // Push the Docker image to Docker Hub
+                    sh "docker tag edureka-igp:${env.BUILD_NUMBER} ${DOCKERHUB_USERNAME}/edureka-igp1:${env.BUILD_NUMBER}"
+                    sh "docker push ${DOCKERHUB_USERNAME}/edureka-igp:${env.BUILD_NUMBER}"
+                }
+            }
+        }
     }
 }

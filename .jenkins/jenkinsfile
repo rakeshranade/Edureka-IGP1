@@ -16,9 +16,66 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image using the Dockerfile in the current directory
-                    sh "docker build -f .docker/igp1.dockerfile -t edureka-igp1:${env.BUILD_NUMBER} --build-arg PROJECT=Edureka-IGP/Edureka-IGP.sln ."
+                    sh "docker build -f .docker/igp1.dockerfile -t edureka-igp1:${env.BUILD_NUMBER} ."
                 }
             }
         }
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    // Run the Docker container from the built image
+                    sh "docker run -d -p 8097:5000 --name edureka-igp1-container edureka-igp1:${env.BUILD_NUMBER}"
+                }
+            }
+        }
+        stage('Test Docker Service') {
+            steps {
+                script {
+                    // Assuming your Docker service is accessible at http://your-docker-service:8080
+                    def dockerServiceUrl = "http://localhost:8097/privacy" 
+
+                    // Execute curl and capture the HTTP status code
+                    def httpCode = sh(
+                        script: "curl --write-out '%{http_code}' --silent --output /dev/null ${dockerServiceUrl}",
+                        returnStdout: true 
+                    ).trim()
+
+                    echo "HTTP Status Code for ${dockerServiceUrl}: ${httpCode}"
+
+                    // Check if the status code indicates success (e.g., 200)
+                    if (httpCode != '200') {
+                        error("Docker service health check failed with status code: ${httpCode}")
+                    } else {
+                        echo "Docker service is healthy."
+                    }
+                }
+            }
+        }
+        stage('stop and clean Docker Container') {
+            steps {
+                script {
+                    // stop container
+                    sh "docker stop edureka-igp1-container"
+                    //delete container
+                    sh "docker rm edureka-igp1-container"
+                    //delete debug image
+                    sh "docker rmi edureka-igp1:${env.BUILD_NUMBER}"
+
+                }
+            }
+        }
+        // stage('Push Docker Image') {
+        //     steps {
+        //         script {
+        //             // Log in to Docker Hub
+        //             withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+        //                 sh "echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin"
+        //             }
+        //             // Push the Docker image to Docker Hub
+        //             sh "docker tag edureka-igp1:${env.BUILD_NUMBER} ${DOCKERHUB_USERNAME}/edureka-igp1:${env.BUILD_NUMBER}"
+        //             sh "docker push ${DOCKERHUB_USERNAME}/edureka-igp1:${env.BUILD_NUMBER}"
+        //         }
+        //     }
+        // }
     }
 }

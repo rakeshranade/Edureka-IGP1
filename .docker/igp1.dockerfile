@@ -2,7 +2,7 @@
 # docker build -f .docker/igp1.dockerfile -t myblazorapp --build-arg PROJECT=src/MyBlazorApp/MyBlazorApp.csproj .
 
 ARG DOTNET_VERSION=8.0
-ARG PROJECT=src/Edureka-IGP/Edureka-IGP.sln
+ARG PROJECT=./src/Edureka-igp1/Edureka-igp1.csproj
 ARG CONFIG=Release
 
 # Stage 1 - build
@@ -11,15 +11,13 @@ WORKDIR /src
 
 # Copy solution and project files for restore (keeps docker cache efficiency)
 COPY . .
-
-RUN echo "--- Listing files in /app ---"
-RUN ls -R /src
-RUN echo "--- End of file listing ---"
-
-# RUN dotnet restore ${PROJECT}
-
+RUN dotnet restore ./src/Edureka-igp1/Edureka-igp1.csproj
+RUN dotnet build --runtime linux-x64 -c Debug -o /app/debug ./src/Edureka-igp1/Edureka-igp1.csproj
+RUN chmod +x /app/debug/Edureka-igp1
+RUN /app/debug/Edureka-igp1
 # Build and publish
 #RUN dotnet publish ${PROJECT} -c ${CONFIG} -o /app/publish --no-restore -p:PublishTrimmed=true
+##RUN dotnet publish src/Edureka-IGP/Edureka-IGP/Edureka-IGP.csproj -c Release -o /app/publish --no-restore -p:PublishTrimmed=true --runtime linux-x64 
 
 # Stage 2 - runtime
 # FROM mcr.microsoft.com/dotnet/aspnet:${DOTNET_VERSION} AS runtime

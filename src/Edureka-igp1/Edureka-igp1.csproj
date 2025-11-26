@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Edureka_igp1</RootNamespace>
+    <UserSecretsId>6aab84e2-9141-495c-8bb4-70d42d62839d</UserSecretsId>
+  </PropertyGroup>
+
+</Project>

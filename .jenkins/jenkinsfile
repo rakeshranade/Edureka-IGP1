@@ -86,8 +86,8 @@ pipeline {
         stage('Deploy to MicroK8s') {
             steps {
                 script {
-                    sh "microk8s kubectl apply -f ./jenkins/.kubernetes/deployment.yaml -n ${KUBERNETES_NAMESPACE}"
-                    sh "microk8s kubectl apply -f ./jenkins/.kubernetes/service.yaml -n ${KUBERNETES_NAMESPACE}"
+                    sh "microk8s kubectl apply -f ./.jenkins/.kubernetes/deployment.yaml -n ${KUBERNETES_NAMESPACE}"
+                    sh "microk8s kubectl apply -f ./.jenkins/.kubernetes/service.yaml -n ${KUBERNETES_NAMESPACE}"
                 }
             }
         }

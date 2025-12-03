@@ -1,0 +1,298 @@
+Started by user Rakesh Ranade
+Lightweight checkout support not available, falling back to full checkout.
+Checking out git https://github.com/rakeshranade/Edureka-IGP1.git into /var/lib/jenkins/workspace/Edureka-IGP@script/24e5742b2476ef1ada07aee2096280cc2872475aa87ac7dd5a2042f1b69bb51b to read .jenkins/jenkinsfile
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/Edureka-IGP@script/24e5742b2476ef1ada07aee2096280cc2872475aa87ac7dd5a2042f1b69bb51b/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/rakeshranade/Edureka-IGP1.git # timeout=10
+Fetching upstream changes from https://github.com/rakeshranade/Edureka-IGP1.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/rakeshranade/Edureka-IGP1.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Seen branch in repository origin/main
+Seen 1 remote branch
+ > git show-ref --tags -d # timeout=10
+Checking out Revision e74acc126156c1a56b5e58ffc544904fa995ab62 (origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f e74acc126156c1a56b5e58ffc544904fa995ab62 # timeout=10
+Commit message: "yaml file name corrected"
+ > git rev-list --no-walk dd136ba28549a1116a398a6b57186fb197d44811 # timeout=10
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/Edureka-IGP
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/Edureka-IGP/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/rakeshranade/Edureka-IGP1.git # timeout=10
+Fetching upstream changes from https://github.com/rakeshranade/Edureka-IGP1.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/rakeshranade/Edureka-IGP1.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Seen branch in repository origin/main
+Seen 1 remote branch
+ > git show-ref --tags -d # timeout=10
+Checking out Revision e74acc126156c1a56b5e58ffc544904fa995ab62 (origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f e74acc126156c1a56b5e58ffc544904fa995ab62 # timeout=10
+Commit message: "yaml file name corrected"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout Code)
+[Pipeline] checkout
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/Edureka-IGP/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/rakeshranade/Edureka-IGP1.git # timeout=10
+Fetching upstream changes from https://github.com/rakeshranade/Edureka-IGP1.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/rakeshranade/Edureka-IGP1.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision e74acc126156c1a56b5e58ffc544904fa995ab62 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f e74acc126156c1a56b5e58ffc544904fa995ab62 # timeout=10
+Commit message: "yaml file name corrected"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Docker Image)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ docker build -f .docker/igp1.dockerfile -t edureka-igp1:33 .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from igp1.dockerfile
+#1 transferring dockerfile: 524B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for mcr.microsoft.com/dotnet/sdk:8.0
+#2 DONE 0.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.1s
+
+#4 [internal] load build context
+#4 DONE 0.0s
+
+#5 [1/6] FROM mcr.microsoft.com/dotnet/sdk:8.0@sha256:874c4613d5ebf8b328ad920a90640c8dea9758bdbe61dc191dbcbed03721fc79
+#5 resolve mcr.microsoft.com/dotnet/sdk:8.0@sha256:874c4613d5ebf8b328ad920a90640c8dea9758bdbe61dc191dbcbed03721fc79 0.1s done
+#5 DONE 0.1s
+
+#4 [internal] load build context
+#4 transferring context: 48.60kB done
+#4 DONE 0.1s
+
+#6 [2/6] WORKDIR /src
+#6 CACHED
+
+#7 [3/6] COPY . .
+#7 DONE 0.7s
+
+#8 [4/6] RUN dotnet restore ./src/Edureka-igp1/Edureka-igp1.csproj
+#8 0.752   Determining projects to restore...
+#8 1.188   Restored /src/src/Edureka-igp1/Edureka-igp1.csproj (in 53 ms).
+#8 DONE 1.8s
+
+#9 [5/6] RUN dotnet build --runtime linux-x64 -c Debug -o /app/debug ./src/Edureka-igp1/Edureka-igp1.csproj
+#9 0.947   Determining projects to restore...
+#9 1.519   Restored /src/src/Edureka-igp1/Edureka-igp1.csproj (in 86 ms).
+#9 4.182   Edureka-igp1 -> /app/debug/Edureka-igp1.dll
+#9 4.190 
+#9 4.190 Build succeeded.
+#9 4.190     0 Warning(s)
+#9 4.190     0 Error(s)
+#9 4.191 
+#9 4.191 Time Elapsed 00:00:03.44
+#9 DONE 4.4s
+
+#10 [6/6] RUN chmod +x /app/debug/Edureka-igp1.dll
+#10 DONE 1.1s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 1.4s done
+#11 exporting manifest sha256:bf5dfa7bf9ea717709b35815d1b82bbe29132e7a1e05e95e3a6b3870ad16836d 0.1s done
+#11 exporting config sha256:e40f1ef1bf83fd4d508aaaf557c972a9cdd056ccdb6a2302f1cb552b3e1acff8 0.1s done
+#11 exporting attestation manifest sha256:dacaebfdee16f0efc5ac02787c2ecfdae86551750e37f6c772521fb90df58685 0.1s done
+#11 exporting manifest list sha256:ea737a99a16cfdc7dbb008056ffeea2ccfbf77c66848b235fb2d20b001364c11
+#11 exporting manifest list sha256:ea737a99a16cfdc7dbb008056ffeea2ccfbf77c66848b235fb2d20b001364c11 0.1s done
+#11 naming to docker.io/library/edureka-igp1:33 0.0s done
+#11 unpacking to docker.io/library/edureka-igp1:33
+#11 unpacking to docker.io/library/edureka-igp1:33 0.5s done
+#11 DONE 2.4s
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Run Docker Container)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ docker run -d -p 8097:5000 --name edureka-igp1-container edureka-igp1:33
+6e30822af8c718ee5fbce3fbdbe1b0e4e23e604c00f9fc79a31298fc548fa45f
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test Docker Service)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ curl --write-out %{http_code} --silent --output /dev/null http://localhost:8097/privacy
+[Pipeline] echo
+HTTP Status Code for http://localhost:8097/privacy: 200
+[Pipeline] echo
+Docker service is healthy.
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (stop and clean Docker Container)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ docker stop edureka-igp1-container
+edureka-igp1-container
+[Pipeline] sh
++ docker rm edureka-igp1-container
+edureka-igp1-container
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Push Docker Image)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $DOCKERHUB_PASSWORD
+[Pipeline] {
+[Pipeline] sh
+Warning: A secret was passed to "sh" using Groovy String interpolation, which is insecure.
+		 Affected argument(s) used the following variable(s): [DOCKERHUB_PASSWORD]
+		 See https://jenkins.io/redirect/groovy-string-interpolation for details.
++ echo ****
++ docker login -u rranade --password-stdin
+Login Succeeded
+[Pipeline] sh
++ docker tag edureka-igp1:33 rranade/edureka-igp:33
+[Pipeline] sh
++ docker push rranade/edureka-igp:33
+The push refers to repository [docker.io/rranade/edureka-igp]
+ff7878038ce4: Waiting
+8e8e42f85c2c: Waiting
+991781e7a361: Waiting
+9e5758336962: Waiting
+7e17930563bd: Waiting
+ed31ddceff9e: Waiting
+8c3f383f7bab: Waiting
+1ac3a5c1c49a: Waiting
+105b3ab61dcf: Waiting
+c3306bc485ed: Waiting
+b821f260bfe7: Waiting
+0820d910fed9: Waiting
+f462afeb0cdd: Waiting
+bdde86475bd9: Waiting
+dbe68e0be9db: Waiting
+8e44f01296e3: Waiting
+8c3f383f7bab: Waiting
+1ac3a5c1c49a: Waiting
+105b3ab61dcf: Waiting
+c3306bc485ed: Waiting
+b821f260bfe7: Waiting
+0820d910fed9: Waiting
+f462afeb0cdd: Waiting
+bdde86475bd9: Waiting
+dbe68e0be9db: Waiting
+8e44f01296e3: Waiting
+ff7878038ce4: Waiting
+8e8e42f85c2c: Waiting
+991781e7a361: Waiting
+9e5758336962: Waiting
+7e17930563bd: Waiting
+ed31ddceff9e: Waiting
+8c3f383f7bab: Waiting
+1ac3a5c1c49a: Waiting
+105b3ab61dcf: Waiting
+c3306bc485ed: Waiting
+b821f260bfe7: Waiting
+0820d910fed9: Waiting
+f462afeb0cdd: Waiting
+bdde86475bd9: Waiting
+dbe68e0be9db: Waiting
+8e44f01296e3: Waiting
+ff7878038ce4: Waiting
+8e8e42f85c2c: Waiting
+991781e7a361: Waiting
+9e5758336962: Waiting
+7e17930563bd: Waiting
+ed31ddceff9e: Layer already exists
+ff7878038ce4: Waiting
+8e8e42f85c2c: Layer already exists
+991781e7a361: Layer already exists
+9e5758336962: Layer already exists
+7e17930563bd: Waiting
+8c3f383f7bab: Layer already exists
+1ac3a5c1c49a: Layer already exists
+105b3ab61dcf: Waiting
+c3306bc485ed: Layer already exists
+b821f260bfe7: Layer already exists
+0820d910fed9: Layer already exists
+f462afeb0cdd: Waiting
+bdde86475bd9: Waiting
+dbe68e0be9db: Layer already exists
+8e44f01296e3: Layer already exists
+7e17930563bd: Waiting
+ff7878038ce4: Waiting
+f462afeb0cdd: Pushed
+bdde86475bd9: Pushed
+ff7878038ce4: Pushed
+7e17930563bd: Pushed
+105b3ab61dcf: Pushed
+33: digest: sha256:ea737a99a16cfdc7dbb008056ffeea2ccfbf77c66848b235fb2d20b001364c11 size: 856
+Did you forget the `def` keyword? WorkflowScript seems to be setting a field named IMAGE_NAME (to a value of type GStringImpl) which could lead to memory leaks or other issues.
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to MicroK8s)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ microk8s kubectl apply -f ./.jenkins/.kubernetes/deployment.yaml -n edureka-igp-namespace
+deployment.apps/edureka-igp1-deployment unchanged
+[Pipeline] sh
++ microk8s kubectl apply -f ./.jenkins/.kubernetes/services.yaml -n edureka-igp-namespace
+service/edureka-igp-service unchanged
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

@@ -4,7 +4,7 @@ pipeline {
         DOCKER_REGISTRY = "your-docker-registry" // e.g., "docker.io/yourusername"
         IMAGE_NAME = ""
         IMAGE_TAG = "latest"
-        KUBERNETES_NAMESPACE = "default" 
+        KUBERNETES_NAMESPACE = "edureka-igp-namespace" 
     }
     stages {
         stage('Checkout Code') {

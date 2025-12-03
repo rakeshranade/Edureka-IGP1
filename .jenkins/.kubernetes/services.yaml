@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: edureka-igp1
+  name: edureka-igp-service
   labels:
-    app: edureka-igp1
+    app: edureka-igp
 spec:
   type: ClusterIP
   selector:

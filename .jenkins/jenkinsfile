@@ -1,5 +1,11 @@
 pipeline {
     agent any
+    environment {
+        DOCKER_REGISTRY = "your-docker-registry" // e.g., "docker.io/yourusername"
+        IMAGE_NAME = ""
+        IMAGE_TAG = "latest"
+        KUBERNETES_NAMESPACE = "default" 
+    }
     stages {
         stage('Checkout Code') {
             steps {
@@ -56,10 +62,8 @@ pipeline {
                 script {
                     // stop container
                     sh "docker stop edureka-igp1-container"
-                    //delete container
+
                     sh "docker rm edureka-igp1-container"
-                    //delete debug image
-                    //sh "docker rmi edureka-igp1:${env.BUILD_NUMBER}"
 
                 }
             }
@@ -74,7 +78,16 @@ pipeline {
                         // Push the Docker image to Docker Hub
                         sh "docker tag edureka-igp1:${env.BUILD_NUMBER} $DOCKERHUB_USERNAME/edureka-igp:${env.BUILD_NUMBER}"
                         sh "docker push $DOCKERHUB_USERNAME/edureka-igp:${env.BUILD_NUMBER}"
+                        IMAGE_NAME = "$DOCKERHUB_USERNAME/edureka-igp"
                     }
+                }
+            }
+        }
+        stage('Deploy to MicroK8s') {
+            steps {
+                script {
+                    sh "microk8s kubectl apply -f kubernetes/deployment.yaml -n ${KUBERNETES_NAMESPACE}"
+                    sh "microk8s kubectl apply -f kubernetes/service.yaml -n ${KUBERNETES_NAMESPACE}"
                 }
             }
         }

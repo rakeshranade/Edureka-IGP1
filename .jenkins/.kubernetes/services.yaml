@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: edureka-igp1
+  labels:
+    app: edureka-igp1
+spec:
+  type: ClusterIP
+  selector:
+    app: edureka-igp1
+  ports:
+    - name: http
+      port: 8097
+      targetPort: 5000
+      protocol: TCP

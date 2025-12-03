@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: edureka-igp1-deployment
+  labels:
+    app: edureka-igp1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: edureka-igp1
+  template:
+    metadata:
+      labels:
+        app: edureka-igp1
+    spec:
+      containers:
+        - name: edureka-igp-cont
+          image: rranade/edureka-igp:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+          env:
+            - name: NODE_ENV
+              value: "production"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 1
+          securityContext:
+            runAsUser: 1000
+            allowPrivilegeEscalation: false
